@@ -4,8 +4,489 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tulio Ramírez - Presidente | PRSA - Por un San Andreas Próspero</title>
-    <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- Variables y Estilos Globales --- */
+        :root {
+            --primary-color: #0d2c4a; /* Azul oscuro corporativo */
+            --secondary-color: #c8102e; /* Rojo republicano */
+            --accent-color: #f1f1f1; /* Gris claro */
+            --text-color: #333;
+            --text-color-light: #ffffff;
+            --header-font: 'Montserrat', sans-serif;
+            --body-font: 'Roboto', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--body-font);
+            color: var(--text-color);
+            line-height: 1.6;
+            background-color: #f9f9f9;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 0;
+        }
+
+        /* --- Animaciones --- */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .content-section, .content-section-dark {
+            /* Se podría activar con JS al hacer scroll para un mejor efecto */
+            animation: fadeIn 1s ease-in-out forwards;
+        }
+
+        /* --- Header --- */
+        .main-header {
+            background-color: rgba(13, 44, 74, 0.95);
+            color: var(--text-color-light);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .logo span {
+            font-family: var(--header-font);
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        .main-header nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        .main-header nav ul li {
+            margin-left: 25px;
+        }
+
+        .main-header nav a {
+            color: var(--text-color-light);
+            text-decoration: none;
+            font-weight: 700;
+            font-family: var(--header-font);
+            font-size: 0.9rem;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .main-header nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--secondary-color);
+            transition: width 0.3s ease;
+        }
+
+        .main-header nav a:hover {
+            color: var(--secondary-color);
+        }
+
+        .main-header nav a:hover::after {
+            width: 100%;
+        }
+
+        /* --- Sección Hero --- */
+        .hero-section {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('images/web/san-andreas-skyline.png') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--text-color-light);
+            padding: 0 5%;
+        }
+
+        .hero-content h1 {
+            font-family: var(--header-font);
+            font-size: 5rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        .hero-content h2 {
+            font-family: var(--header-font);
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+            animation: fadeIn 2s ease-out;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            animation: fadeIn 2.5s ease-out;
+        }
+
+        .cta-button {
+            background-color: var(--secondary-color);
+            color: var(--text-color-light);
+            padding: 15px 30px;
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.3s;
+            font-family: var(--header-font);
+        }
+
+        .cta-button:hover {
+            background-color: #a60c24;
+            transform: translateY(-3px);
+        }
+
+        /* --- Estilos de Secciones --- */
+        .content-section {
+            background-color: #fff;
+            padding-top: 80px;
+        }
+
+        .content-section-dark {
+            background-color: var(--primary-color);
+            color: var(--text-color-light);
+            padding-top: 80px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-family: var(--header-font);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .title-decorator {
+            width: 80px;
+            height: 4px;
+            background-color: var(--secondary-color);
+            margin: 0 auto;
+            border-radius: 2px;
+        }
+
+        /* --- Biografía --- */
+        .bio-layout {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            flex-wrap: wrap; /* Para responsividad */
+        }
+
+        .bio-image {
+            flex: 1 1 300px; /* Flexbox para responsividad */
+            text-align: center;
+        }
+
+        .bio-image img {
+            width: 100%;
+            max-width: 350px;
+            height: auto;
+            border-radius: 5px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .bio-text {
+            flex: 2 1 500px; /* Flexbox para responsividad */
+        }
+
+        .bio-text h3 {
+            font-family: var(--header-font);
+            font-size: 2rem;
+            color: var(--secondary-color);
+        }
+
+        .bio-text p {
+            margin-bottom: 1rem;
+        }
+
+        .bio-text blockquote {
+            border-left: 4px solid var(--secondary-color);
+            padding-left: 1.5rem;
+            margin-top: 1.5rem;
+            font-style: italic;
+            font-size: 1.1rem;
+            color: #555;
+        }
+
+        /* --- Nuestro Partido --- */
+        .partido-intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            font-size: 1.1rem;
+        }
+
+        .pilares-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .pilar {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 5px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .pilar:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        .icon-custom {
+            font-size: 3rem;
+            color: var(--secondary-color);
+            font-style: normal;
+        }
+
+        .pilar h4 {
+            font-family: var(--header-font);
+            font-size: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        /* --- Logros --- */
+        .logros-intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            font-size: 1.1rem;
+        }
+
+        .logros-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .logro-card {
+            background-color: #f1f1f1;
+            padding: 2rem;
+            border-left: 5px solid var(--primary-color);
+            border-radius: 0 5px 5px 0;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .logro-card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .numero-logro {
+            font-family: var(--header-font);
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        .logro-card h3 {
+            font-family: var(--header-font);
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+        }
+
+        /* --- Equipo de Gobierno --- */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .team-member {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 5px;
+            transition: transform 0.3s;
+        }
+
+        .team-member:hover {
+            transform: translateY(-5px);
+        }
+
+        .member-photo-container {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            overflow: hidden;
+            border: 4px solid var(--secondary-color);
+        }
+
+        .member-photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .team-member h4 {
+            font-family: var(--header-font);
+            font-size: 1.5rem;
+            color: var(--text-color-light);
+        }
+
+        .team-member p {
+            color: var(--accent-color);
+            font-size: 0.9rem;
+        }
+
+        .team-member p.member-desc {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.7);
+            margin-top: 0.5rem;
+        }
+
+        /* --- Propuestas (Acordeón) --- */
+        .propuestas-accordion {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .accordion-item {
+            background-color: #fff;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .accordion-header {
+            width: 100%;
+            background-color: var(--primary-color);
+            color: var(--text-color-light);
+            border: none;
+            padding: 1.5rem;
+            text-align: left;
+            font-family: var(--header-font);
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            position: relative;
+        }
+        
+        .accordion-header::after {
+            content: '+';
+            font-size: 2rem;
+            position: absolute;
+            right: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            transition: transform 0.3s;
+        }
+
+        .accordion-header.active::after {
+            transform: translateY(-50%) rotate(45deg);
+        }
+
+        .accordion-header:hover {
+            background-color: #1a4a7a;
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out, padding 0.5s ease-out;
+            padding: 0 1.5rem;
+            background-color: #fdfdfd;
+            color: var(--text-color);
+        }
+
+        .accordion-content p {
+            padding: 1.5rem 0;
+            border-top: 1px solid #eee;
+        }
+
+        /* --- Footer (Contacto) --- */
+        footer {
+            background-color: #222;
+            color: var(--text-color-light);
+            text-align: center;
+            padding: 4rem 5% 2rem;
+        }
+
+        footer h3 {
+            font-family: var(--header-font);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .discord-button {
+            display: inline-flex;
+            align-items: center;
+            background-color: #5865F2; /* Color oficial de Discord */
+            color: white;
+            padding: 15px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 700;
+            margin: 2rem 0;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        .discord-button:hover {
+            transform: translateY(-5px);
+            background-color: #4a54c9;
+        }
+
+        .discord-button .icon-custom {
+            margin-right: 10px;
+            font-size: 1.5rem;
+        }
+
+        .footer-bottom {
+            margin-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+    </style>
 </head>
 <body>
 
@@ -49,7 +530,7 @@
                 <div class="bio-text">
                     <h3>Tulio Ramírez</h3>
                     <p>Nacido y criado en Los Santos, Tulio Ramírez es un hombre de principios, forjado en el trabajo duro y el servicio público. Con una destacada carrera como empresario y filántropo, decidió volcar su experiencia en la política para devolverle a San Andreas la grandeza que sus ciudadanos merecen.</p>
-                    <p>Bajo su liderazgo, hemos implementado una política de **tolerancia cero contra la corrupción** y hemos enfocado los recursos del estado en lo que verdaderamente importa: la seguridad, el empleo y la calidad de vida de nuestra gente. Su visión no es de promesas, sino de **hechos y resultados concretos**.</p>
+                    <p>Bajo su liderazgo, hemos implementado una política de <strong>tolerancia cero contra la corrupción</strong> y hemos enfocado los recursos del estado en lo que verdaderamente importa: la seguridad, el empleo y la calidad de vida de nuestra gente. Su visión no es de promesas, sino de <strong>hechos y resultados concretos</strong>.</p>
                     <blockquote>
                         "Mi compromiso es con cada ciudadano de San Andreas. No descansaré hasta que cada familia pueda vivir en paz, con oportunidades reales para prosperar."
                     </blockquote>
@@ -64,20 +545,20 @@
                 <h2>Partido Republicano de San Andreas (PRSA)</h2>
                 <div class="title-decorator"></div>
             </div>
-            <p class="partido-intro">El PRSA se fundamenta en los pilares de la **libertad individual, la responsabilidad fiscal y un gobierno limitado pero fuerte**. Creemos en el poder de la gente, no en el de la burocracia. Nuestro objetivo es crear un entorno donde el mérito y el esfuerzo sean la clave del éxito.</p>
+            <p class="partido-intro">El PRSA se fundamenta en los pilares de la <strong>libertad individual, la responsabilidad fiscal y un gobierno limitado pero fuerte</strong>. Creemos en el poder de la gente, no en el de la burocracia. Nuestro objetivo es crear un entorno donde el mérito y el esfuerzo sean la clave del éxito.</p>
             <div class="pilares-grid">
                 <div class="pilar">
-                    <span class="icon-custom">[ICONO_SEGURIDAD]</span>
+                    <span class="icon-custom">⚖️</span>
                     <h4>Seguridad y Justicia</h4>
                     <p>Fortalecemos nuestras fuerzas del orden y garantizamos un sistema judicial implacable con el crimen.</p>
                 </div>
                 <div class="pilar">
-                    <span class="icon-custom">[ICONO_ECONOMIA]</span>
+                    <span class="icon-custom">📈</span>
                     <h4>Desarrollo Económico</h4>
                     <p>Impulsamos la libre empresa, reducimos impuestos y eliminamos trabas burocráticas para atraer inversión.</p>
                 </div>
                 <div class="pilar">
-                    <span class="icon-custom">[ICONO_LIBERTAD]</span>
+                    <span class="icon-custom">🕊️</span>
                     <h4>Libertades Individuales</h4>
                     <p>Defendemos el derecho de cada ciudadano a perseguir sus sueños sin la interferencia de un gobierno sobreprotector.</p>
                 </div>
@@ -138,7 +619,7 @@
                     </div>
                     <h4>Isabella Nova</h4>
                     <p><strong>Secretaria de Desarrollo Económico</strong></p>
-                    <p class="member-desc">Arquitecta del plan de reactivación económica. Su experiencia en el sector privado ha sido clave para atraer inversiones y fomentar la creación de empleo de calidad en todo el estado.</p>
+                    <p class="member-desc">Arquitecta del plan de reactivación económica. Su experiencia en el sector privado ha sido clave para atraer inversiones y fomentar la creación de empleo de calidad.</p>
                 </div>
             </div>
         </div>
@@ -178,7 +659,7 @@
             <h3>Únete a la Conversación</h3>
             <p>Tu voz es importante para nosotros. Súmate a nuestra comunidad para debatir ideas, conocer nuestras últimas noticias y participar activamente en el cambio.</p>
             <a href="https://discord.gg/znTTBydsNZ" target="_blank" class="discord-button">
-                <span class="icon-custom">[ICONO_DISCORD]</span>
+                <span class="icon-custom">💬</span>
                 Únete a nuestro Discord Oficial
             </a>
             <div class="footer-bottom">
@@ -188,6 +669,32 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const accordionHeaders = document.querySelectorAll('.accordion-header');
+
+            accordionHeaders.forEach(header => {
+                header.addEventListener('click', function () {
+                    const currentlyActiveHeader = document.querySelector('.accordion-header.active');
+                    if (currentlyActiveHeader && currentlyActiveHeader !== this) {
+                        currentlyActiveHeader.classList.remove('active');
+                        currentlyActiveHeader.nextElementSibling.style.maxHeight = null;
+                        currentlyActiveHeader.nextElementSibling.style.padding = "0 1.5rem";
+                    }
+
+                    this.classList.toggle('active');
+                    const content = this.nextElementSibling;
+                    if (content.style.maxHeight) {
+                        content.style.maxHeight = null;
+                        content.style.padding = "0 1.5rem";
+                    } else {
+                        // Se añade un pequeño buffer para asegurar que el contenido no se corte
+                        content.style.maxHeight = (content.scrollHeight + 20) + "px";
+                        content.style.padding = null; // El padding se maneja en el css del content.p
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
